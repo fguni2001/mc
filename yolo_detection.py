@@ -5,12 +5,9 @@ import cv2
 import numpy as np
 from pathlib import Path
 
-# For Ultralytics YOLOv3, you need their repo with these modules available!
 from models.common import DetectMultiBackend
 from utils.general import non_max_suppression, scale_boxes, check_img_size
 from utils.torch_utils import select_device
-# Optional: Uncomment if you have their letterbox function
-# from utils.augmentations import letterbox
 
 class YOLOv3Detector:
     def __init__(
@@ -31,13 +28,9 @@ class YOLOv3Detector:
         self.imgsz = check_img_size((img_size, img_size), s=self.stride)
         self.conf_thres = conf_thres
         self.iou_thres = iou_thres
-        self.target_class_id = 0  # Only detect 'person' (COCO ID = 0)
+        self.target_class_id = 0  
 
     def preprocess(self, frame):
-        # Use letterbox if available, else fallback to simple resize
-        # try:
-        #     img, _, _ = letterbox(frame, self.imgsz, stride=self.stride, auto=True)
-        # except ImportError:
         img = cv2.resize(frame, self.imgsz)
         img = img[:, :, ::-1].transpose(2, 0, 1)  # BGR to RGB, HWC to CHW
         img = np.ascontiguousarray(img)

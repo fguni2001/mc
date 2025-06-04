@@ -11,7 +11,7 @@ from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
 
 from yolo_detection import YOLOv3Detector
-from tools.extract_features import FeatureExtractor  # <--- FIXED path
+from tools.extract_features import FeatureExtractor 
 
 # Utility modules
 from application_utils.detection_filter import nms_boxes
@@ -178,7 +178,6 @@ def main():
         max_frames=args.max_frames
     )
 
-    # Optional: render visualization video
     import result_renderer
     result_renderer.run(
         sequence_path=args.dataset_path,

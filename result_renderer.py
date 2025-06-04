@@ -1,5 +1,4 @@
 
-
 import argparse
 import cv2
 import numpy as np
@@ -19,24 +18,6 @@ def render_visualization(
     frame_interval_ms=None,
     output_video_file=None
 ):
-    """
-    Visualize tracking results with optional video output.
-
-    Parameters
-    ----------
-    sequence_path : str
-        Path to the MOTChallenge sequence directory.
-    tracking_results_file : str
-        Path to the tracking output file (MOTChallenge format).
-    highlight_false_alarms : bool
-        If True, show false alarms in red.
-    detection_data_file : str, optional
-        Path to detection data file.
-    frame_interval_ms : int, optional
-        Milliseconds between frames. Uses seqinfo.ini or default if not provided.
-    output_video_file : str, optional
-        If given, writes video of visualization to this path.
-    """
 
     # Get sequence info (images, optionally ground truth & detections)
     sequence_info = gather_sequence_info(sequence_path, detection_data_file)
@@ -57,12 +38,12 @@ def render_visualization(
         frame = cv2.imread(img_path, cv2.IMREAD_COLOR)
         display.set_image(frame.copy())
 
-        # 1️⃣ Draw raw detections (in red)
+        # Draw raw detections (in red)
         if sequence_info.get("detections") is not None:
             detections = create_detections(sequence_info["detections"], frame_index)
             display.draw_detections(detections)
 
-        # 2️⃣ Draw tracker outputs (rainbow per track_id)
+        # Draw tracker outputs (rainbow per track_id)
         mask = results[:, 0].astype(int) == frame_index
         track_ids = results[mask, 1].astype(int)
         bboxes    = results[mask, 2:6]
@@ -79,7 +60,7 @@ def render_visualization(
         ]
         display.draw_trackers(tracks)
 
-        # 3️⃣ Highlight false alarms if requested
+        # Highlight false alarms if requested
         if highlight_false_alarms:
             gt = sequence_info["groundtruth"]
             mask_gt = gt[:, 0].astype(int) == frame_index

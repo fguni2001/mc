@@ -1,17 +1,7 @@
-# preprocess_utils.py
 import numpy as np
 import cv2
 
 def nms_boxes(bboxes, overlap_thresh, conf_scores=None):
-    """
-    Non-maximum suppression for overlapping bounding boxes.
-
-    bboxes: ndarray (N,4) [x, y, w, h]
-    overlap_thresh: float
-    conf_scores: (optional) list/array of confidences
-
-    Returns: List of picked indices.
-    """
     if len(bboxes) == 0:
         return []
     bboxes = bboxes.astype(np.float64)

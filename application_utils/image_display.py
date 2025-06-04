@@ -1,7 +1,3 @@
-# viewer_module.py
-"""
-Viewer utilities based on OpenCV for displaying and drawing on images.
-"""
 import cv2
 import numpy as np
 import time

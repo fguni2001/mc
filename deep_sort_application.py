@@ -10,7 +10,7 @@ from deep_sort import nn_matching
 from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
 
-# **Your** utility modules
+#Utility modules
 from application_utils.detection_filter import nms_boxes
 from application_utils.tracking_visualizer import Displayer
 
@@ -79,9 +79,9 @@ def create_detections(det_mat, frame_idx, min_height=0):
         dets.append(Detection(bbox, conf, feat))
     return dets
 
-# ————————————————
-# Run DeepSORT and write out a <seq>_tracks.txt file
-# ————————————————
+# ————————————
+# Run DeepSORT 
+# ————————————
 
 def run_tracker(
     sequence_dir,
@@ -160,7 +160,7 @@ def main():
         out_txt  = os.path.join(args.output_path, f"{seq_name}.txt")
         out_vid  = os.path.join(args.output_path, f"{seq_name}.avi")
 
-        # 1️⃣ run tracker → produces out_txt
+        # Run tracker → produces out_txt
         run_tracker(
             args.dataset_path,
             det_file,
@@ -168,7 +168,7 @@ def main():
             display=args.display
         )
 
-        # 2️⃣ visualize those results
+        # Visualize those results
         import result_renderer
         result_renderer.run(
             sequence_path=args.dataset_path,

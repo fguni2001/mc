@@ -3,9 +3,6 @@ import colorsys
 from .image_display import SimpleImageDisplayer
 
 def unique_color(tag, h_step=0.41):
-    """
-    Generate a unique RGB color (0–255) for a given integer tag using HSV space.
-    """
     h = (tag * h_step) % 1
     v = 1.0 - (int(tag * h_step) % 4) / 5.0
     r, g, b = colorsys.hsv_to_rgb(h, 1.0, v)
@@ -13,7 +10,6 @@ def unique_color(tag, h_step=0.41):
 
 
 class DummyVisualizer:
-    """Fast-forward visualizer: no drawing, just calls your frame callback."""
     def __init__(self, seqdata):
         self.idx = seqdata["min_frame_idx"]
         self.last = seqdata["max_frame_idx"]
@@ -30,10 +26,7 @@ class DummyVisualizer:
 
 
 class Displayer:
-    """OpenCV-based visualizer for ground truth, detections, and tracker outputs."""
     def __init__(self, seqdata, ms_delay):
-        # Build a 1024px-wide window, preserving aspect ratio.
-        # Use actual frame size!
         frame_h, frame_w = seqdata["image_size"][:2]
         display_shape = (frame_w, frame_h)
 
@@ -68,7 +61,7 @@ class Displayer:
     def draw_detections(self, dets):
         """Draw raw detection boxes in solid red."""
         self.viewer.line_width = 2
-        self.viewer.set_color((0, 0, 255))  # BGR = red
+        self.viewer.set_color((0, 0, 255)) 
         for d in dets:
             self.viewer.draw_rect(*d.tlwh)
 
