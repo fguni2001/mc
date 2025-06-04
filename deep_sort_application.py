@@ -11,8 +11,8 @@ from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
 
 # **Your** utility modules
-from application_util.detection_filter import nms_boxes
-from application_util.tracking_visualizer import Displayer
+from application_utils.detection_filter import nms_boxes
+from application_utils.tracking_visualizer import Displayer
 
 # ————————————————
 # Helpers to load a sequence and its detections

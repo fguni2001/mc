@@ -7,7 +7,7 @@ from types import SimpleNamespace
 
 from deep_sort_application import gather_sequence_info, create_detections
 from deep_sort.iou_matching import iou
-from application_util.tracking_visualizer import Displayer
+from application_utils.tracking_visualizer import Displayer
 
 DEFAULT_FRAME_INTERVAL_MS = 20
 
