@@ -1,5 +1,3 @@
-# show_helpers.py
-
 import numpy as np
 import colorsys
 from .image_display import SimpleImageDisplayer
@@ -35,9 +33,10 @@ class Displayer:
     """OpenCV-based visualizer for ground truth, detections, and tracker outputs."""
     def __init__(self, seqdata, ms_delay):
         # Build a 1024px-wide window, preserving aspect ratio.
-        shape = seqdata["image_size"][::-1]
-        aspect = float(shape[1]) / shape[0]
-        display_shape = (1024, int(aspect * 1024))
+        # Use actual frame size!
+        frame_h, frame_w = seqdata["image_size"][:2]
+        display_shape = (frame_w, frame_h)
+
 
         self.viewer = SimpleImageDisplayer(ms_delay, display_shape,
                                            f"Seq {seqdata['sequence_name']}")

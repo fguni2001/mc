@@ -1,0 +1,7 @@
+numpy
+scipy
+opencv-python
+torch
+torchvision
+tensorflow==1.15
+tqdm

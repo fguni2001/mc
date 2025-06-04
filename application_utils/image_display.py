@@ -76,7 +76,11 @@ class SimpleImageDisplayer:
         fourcc = cv2.VideoWriter_fourcc(*codec)
         fps = fps or int(1000. / self.delay)
         height, width = self.size[1], self.size[0]
+        # Defensive: don't allow absurd sizes
+        if width > 5000 or height > 5000 or width <= 0 or height <= 0:
+            raise ValueError(f"Refusing to write video with abnormal size: {width}x{height}")
         self.writer = cv2.VideoWriter(filename, fourcc, fps, (width, height))
+
 
 
     def disable_writer(self):
